@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis AI Biomechanical Analysis - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a5490 0%, #2d5aa8 50%, #4a90e2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 30px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .slide:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: linear-gradient(45deg, #1a5490, #4a90e2);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(26, 84, 144, 0.3);
+        }
+
+        .slide h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #1a5490, #4a90e2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .slide h2 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #1a5490;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2d5aa8;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.6rem;
+            color: #4a90e2;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .slide p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .slide ul {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-left: 0;
+            list-style: none;
+        }
+
+        .slide li {
+            margin-bottom: 18px;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .slide li::before {
+            content: '🎾';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(26, 84, 144, 0.08), rgba(74, 144, 226, 0.08));
+            border-left: 5px solid #4a90e2;
+            padding: 35px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(26, 84, 144, 0.1);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .column {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(74, 144, 226, 0.2);
+        }
+
+        .column h4 {
+            color: #1a5490;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .pricing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(26, 84, 144, 0.05), rgba(74, 144, 226, 0.05));
+            border: 2px solid rgba(74, 144, 226, 0.2);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(26, 84, 144, 0.15);
+        }
+
+        .pricing-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a5490;
+            margin-bottom: 15px;
+        }
+
+        .pricing-description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(26, 84, 144, 0.1), rgba(74, 144, 226, 0.1));
+            border-radius: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #1a5490, #4a90e2);
+            color: white;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(26, 84, 144, 0.3);
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(26, 84, 144, 0.4);
+        }
+
+        .case-study-box {
+            background: linear-gradient(135deg, rgba(26, 84, 144, 0.05), rgba(74, 144, 226, 0.05));
+            border: 2px solid rgba(74, 144, 226, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+        }
+
+        .scenario-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            border-left: 4px solid #4a90e2;
+        }
+
+        .scenario-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, rgba(26, 84, 144, 0.1), rgba(74, 144, 226, 0.1));
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 80px;
+            background: linear-gradient(45deg, #1a5490, #4a90e2);
+            border-radius: 10px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 30px;
+            }
+            
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+            
+            .slide h2 {
+                font-size: 2rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Title Slide -->
+        <div class="slide">
+            <div class="slide-number">1/9</div>
+            <h1>Revolutionizing Tennis Training with AI Biomechanical Analysis</h1>
+            <div class="subtitle">Elevate Player Development. Differentiate Your Academy.</div>
+            <div class="contact-info">
+                <p style="font-size: 1.2rem; margin-bottom: 10px;">
+                    <strong>Naveen Kumar</strong><br>
+                    📧 naveensopt@gmail.com<br>
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide">
+            <div class="slide-number">2/9</div>
+            <h2>Conventional methods miss measurable outcomes</h2>
+            <div class="highlight-box">
+                <ul>
+                    <li>Player development is often based on subjective observations</li>
+                    <li>Parents and students demand visible progress and modern training methods</li>
+                    <li>Academies struggle to differentiate in a competitive market</li>
+                    <li>Top-level biomechanical tools are costly and inaccessible</li>
+                </ul>
+            </div>
+            <p style="font-style: italic; margin-top: 30px; color: #1a5490;">
+                "Without measurable data, how can we prove improvement?"
+            </p>
+        </div>
+
+        <!-- Slide 3: Our Solution -->
+        <div class="slide">
+            <div class="slide-number">3/9</div>
+            <h2>AI-Powered Biomechanical Video Analysis</h2>
+            <div class="highlight-box">
+                <ul>
+                    <li>Analyze player strokes and serves in real-time from any video</li>
+                    <li>Deliver detailed biomechanical feedback instantly</li>
+                    <li>Provide visual reports that coaches, parents, and players can understand</li>
+                    <li>Designed for use by academies without extra equipment</li>
+                </ul>
+            </div>
+            <p style="text-align: center; margin-top: 30px; font-weight: 600; color: #1a5490;">
+                Transform any smartphone video into professional-grade biomechanical analysis
+            </p>
+        </div>
+
+        <!-- Slide 4: What's In It For Academies -->
+        <div class="slide">
+            <div class="slide-number">4/9</div>
+            <h2>What's In It For Your Academy</h2>
+            <div class="highlight-box">
+                <h3 style="text-align: center; margin-bottom: 25px; color: #1a5490;">🏆 Competitive Advantages</h3>
+                <ul>
+                    <li><strong>Premium Positioning:</strong> Market yourself as the only tech-forward academy in your area</li>
+                    <li><strong>Higher Revenue Per Student:</strong> Justify 20-30% higher pricing with data-driven coaching</li>
+                    <li><strong>Improved Student Retention:</strong> Parents see measurable progress, leading to longer commitments</li>
+                    <li><strong>Attract Serious Players:</strong> Advanced players seek academies with professional-grade analysis</li>
+                    <li><strong>Coach Efficiency:</strong> Spend less time explaining, more time correcting with visual proof</li>
+                    <li><strong>Marketing Gold:</strong> Before vs after videos and progress reports become powerful marketing tools</li>
+                </ul>
+            </div>
+            <p style="text-align: center; margin-top: 30px; font-size: 1.3rem; font-weight: 600; color: #1a5490;">
+                Transform from "just another tennis academy" to "the innovative academy parents choose"
+            </p>
+        </div>
+
+        <!-- Slide 5: Key Features -->
+        <div class="slide">
+            <div class="slide-number">5/9</div>
+            <h2>What the App Does</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h4>🎯 For Coaches</h4>
+                    <ul>
+                        <li>Frame-by-frame stroke analysis</li>
+                        <li>Compare players to professional baselines</li>
+                        <li>Identify inefficiencies in real time</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>📊 For Players/Parents</h4>
+                    <ul>
+                        <li>Visual progress reports</li>
+                        <li>Injury risk reduction via posture and form correction</li>
+                        <li>Motivation through measurable improvement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Use Case -->
+        <div class="slide">
+            <div class="slide-number">6/9</div>
+            <h2>Faster Improvement = Happier Clients</h2>
+            <div class="case-study-box">
+                <h3 style="text-align: center; margin-bottom: 30px;">Example Scenario</h3>
+                <div class="scenario-item">
+                    <div class="scenario-icon">📹</div>
+                    <div>Student uses app 2x/week over 3 months</div>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-icon">📈</div>
+                    <div>Serve speed improves by 8%, consistency by 15%</div>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-icon">💰</div>
+                    <div>Parents renew training contract at higher tier</div>
+                </div>
+                <div class="scenario-item">
+                    <div class="scenario-icon">🎯</div>
+                    <div>Coach refines training plan with measurable results</div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Slide 7: Pricing Model -->
+        <div class="slide">
+            <div class="slide-number">7/9</div>
+            <h2>Flexible Pricing for Your Academy's Needs</h2>
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <div class="pricing-title">Subscription Model</div>
+                    <div class="pricing-description">
+                        Monthly fee based on number of active users or players.<br>
+                        Scales with academy size.
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-title">Pay-per-Report</div>
+                    <div class="pricing-description">
+                        Fixed price per biomechanical report generated.<br>
+                        Perfect for occasional use.
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-title">White-Label License</div>
+                    <div class="pricing-description">
+                        Custom branding + full integration into academy offering.<br>
+                        Your technology, your brand.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Why Now -->
+        <div class="slide">
+            <div class="slide-number">8/9</div>
+            <h2>The Game is Changing — Be First to Lead</h2>
+            <div class="highlight-box">
+                <ul>
+                    <li>AI & video tech have reached coaching-level usability</li>
+                    <li>Parents expect more accountability from sports programs</li>
+                    <li>Academies that adopt technology now will lead the next generation</li>
+                </ul>
+            </div>
+            <p style="text-align: center; margin-top: 40px; font-size: 1.4rem; font-weight: 600; color: #1a5490;">
+                The early adopters will dominate the market
+            </p>
+        </div>
+
+        <!-- Slide 9: Next Steps -->
+        <div class="slide">
+            <div class="slide-number">9/9</div>
+            <h2>Let's Get Started</h2>
+            <div class="highlight-box">
+                <ul>
+                    <li>Free 15-day pilot for your academy</li>
+                    <li>Staff onboarding & quick-start guide provided</li>
+                    <li>Tailored platform setup customized for your coaching team</li>
+                </ul>
+            </div>
+            <div class="cta-section">
+                <h3 style="margin-bottom: 30px; color: #1a5490;">Ready to revolutionize your tennis academy?</h3>
+                <a href="#" class="cta-button">📅 Schedule Live Demo</a>
+                <div style="margin-top: 30px;">
+                    <p style="font-size: 1.2rem;">
+                        📧 naveensopt@gmail.com<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
